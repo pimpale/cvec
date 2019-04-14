@@ -1,9 +1,15 @@
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
-#include "constants.h"
 #include "vector.h"
+
+#define FATAL(x)                                                               \
+  do {                                                                         \
+    fprintf(stderr, x);                                                        \
+    exit(EXIT_FAILURE);                                                        \
+  } while (0)
 
 //The initial capacity of the vector
 #define INITIAL_CAPACITY 1000
