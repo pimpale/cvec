@@ -12,7 +12,7 @@
   } while (0)
 
 //The initial capacity of the vector
-#define INITIAL_CAPACITY 1000
+#define INITIAL_CAPACITY 1
 // The percent it will increase when out of room MUST BE POSITIVE
 // Ex. 0.5 -> 50% expansion each time the limit is hit 
 
