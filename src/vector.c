@@ -63,14 +63,14 @@ void* insertVector(Vector *vector, size_t loc, size_t len) {
   if (vector->length + len >= vector->capacity) {
     resizeVector(vector, len);
   }
-  uint8_t* data = vector->data;
-  uint8_t* datadest = data + loc;
-  // Move memory
-  memmove(data + loc + len, data + loc, vector->length - loc);
+  uint8_t* src = vector->data;
+  uint8_t* dest = src + loc;
+  // Move memory from end of allocation back 
+  memmove(dest + len, src + loc, vector->length - loc);
   // Zero out new memory
-  memset(data + loc, 0, len);
+  memset(src + loc, 0, len);
   vector->length += len;
-  return datadest;
+  return dest;
 }
 
 void removeVector(Vector *vector, size_t loc, size_t len) {
