@@ -14,7 +14,7 @@
 //The initial capacity of the vector
 #define INITIAL_CAPACITY 1
 // The percent it will increase when out of room MUST BE POSITIVE
-// Ex. 0.5 -> 50% expansion each time the limit is hit 
+// Ex. 1.5 -> 50% expansion each time the limit is hit 
 
 void setSizeVector(Vector *vector, size_t size);
 void resizeVector(Vector *vector, size_t size);
@@ -63,25 +63,25 @@ void* insertVector(Vector *vector, size_t loc, size_t len) {
   if (vector->length + len >= vector->capacity) {
     resizeVector(vector, len);
   }
-  uint8_t* src = vector->data;
-  uint8_t* dest = src + loc;
-  // Move memory from end of allocation back 
-  memmove(dest + len, src + loc, vector->length - loc);
-  // Zero out new memory
-  memset(src + loc, 0, len);
   vector->length += len;
-  return dest;
+  uint8_t* src = getVector(vector, loc);
+  uint8_t* dest = getVector(vector, loc + len);
+  // Move memory from end of allocation back 
+  memmove(dest, src, vector->length - (loc + len));
+  // Zero out new memory
+  memset(src, 0, len);
+  return src;
 }
 
 void removeVector(Vector *vector, size_t loc, size_t len) {
   if (len > vector->length - loc) {
     FATAL("vector underflow");
   }
-
-  uint8_t* data = vector->data;
-
-  memmove(data + loc, data + loc + len, vector->length - (loc + len));
   vector->length -= len;
+
+  uint8_t* src = getVector(vector, loc + len);
+  uint8_t* dest = getVector(vector, loc);
+  memmove(dest, src, vector->length - loc);
 }
 
 void* getVector(Vector* vector, size_t loc) {
