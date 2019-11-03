@@ -76,10 +76,11 @@ void removeVector(Vector *vector, size_t loc, size_t len) {
   if (len > vector->length - loc) {
     FATAL("vector underflow");
   }
-  vector->length -= len;
 
   uint8_t *src = getVector(vector, loc + len);
   uint8_t *dest = getVector(vector, loc);
+
+  vector->length -= len;
   memmove(dest, src, vector->length - loc);
 }
 
