@@ -1,7 +1,7 @@
-TARGET_EXEC ?= cvec
+TARGET_EXEC ?= cvec-example
 
 BUILD_DIR ?= ./obj
-SRC_DIRS ?= ./src
+SRC_DIRS ?= ./src ./example
 
 SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
