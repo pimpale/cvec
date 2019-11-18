@@ -53,7 +53,9 @@ void popVector(Vector *vector, void *data, size_t len) {
   if (len > vector->length) {
     FATAL("vector underflow");
   }
-  memmove(data, (uint8_t *)vector->data + vector->length - len, len);
+  if(data != NULL) {
+    memmove(data, (uint8_t *)vector->data + vector->length - len, len);
+  }
   removeVector(vector, vector->length - len, len);
 }
 
