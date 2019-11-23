@@ -4,7 +4,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef struct {
+typedef struct __attribute__((__packed__)) {
+  void *key;
   // Do not realloc data
   void *data;
   // Do not manually modify length or capacity
